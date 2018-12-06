@@ -35,11 +35,30 @@ export class GHFetch extends Component {
     if(this.state.requestFailed) return <p>Failed Request</p>
     if(!this.state.ghResponse) return <p>Loading API data </p>
 
-    return(
+    let imageArr = [];
+
+    this.state.ghResponse.forEach((item,index) => {
+      if(!imageArr.includes(item.avatarurl)) {
+      imageArr.push(<ImageItem imageUrl={item.avatarurl} key={index} />)
+      }
+    })
+
+    return (
+      <div className="imageblock">
+        {imageArr}
+      <p>{this.state.ghResponse[0].avatarurl}</p>
+      </div>
+    )
+  }
+}
+
+
+class ImageItem extends React.Component {
+  render() {
+
+    return (
       <div>
-        <p>Loading</p>
-      <img alt="avatar" src={this.state.ghResponse[0].avatarurl}/>
-      <p>{this.state.ghResponse[0].username}</p>
+        <img src={this.props.imageUrl} alt="avatars" />
       </div>
     )
   }

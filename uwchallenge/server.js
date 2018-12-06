@@ -19,18 +19,24 @@ const ghResponse = [];
 app.get('/', (req, res, next) => {
   axios.all([
     axios.get('https://api.github.com/repositories?since=1000'),
-    axios.get('https://api.github.com/repositories?since=1100')
-  ]).then(axios.spread((response1, response2) => {
-    let preParsedArr = response1.data;
-    preParsedArr.forEach(obj => {
-      let parsedObj = {
-        repoid: obj.id,
-        username: obj.owner.login,
-        avatarurl: obj.owner.avatar_url,
-        followers: obj.owner.followers_url,
-      };
-      ghResponse.push(parsedObj);
+    axios.get('https://api.github.com/repositories?since=1100'),
+    axios.get('https://api.github.com/repositories?since=1200')
+  ]).then(axios.spread((response1, response2, response3) => {
+    // let preParsedArr = response1.data;
+    let preParsedArr = [response1.data, response2.data, response3.data];
+
+    preParsedArr.forEach(array => {
+      array.forEach(obj => {
+        let parsedObj = {
+          repoid: obj.id,
+          username: obj.owner.login,
+          avatarurl: obj.owner.avatar_url,
+          followers: obj.owner.followers_url,
+        };
+        ghResponse.push(parsedObj);
+      })
     })
+    console.log(ghResponse.length)
     console.log('API Fulfilled available for pull');
     res.send( ghResponse);
   })).catch(error => {
