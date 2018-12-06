@@ -4,6 +4,12 @@ var express = require('express'),
 
 var axios = require('axios');  
 var bodyParser = require('body-parser');
+var cors = require('cors');
+
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000'],
+}));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -16,8 +22,6 @@ app.get('/', (req, res, next) => {
     axios.get('https://api.github.com/repositories?since=1100')
   ]).then(axios.spread((response1, response2) => {
     let preParsedArr = response1.data;
-    // console.log(response1.data[0]);
-    // console.log(response2.data[0]);
     preParsedArr.forEach(obj => {
       let parsedObj = {
         repoid: obj.id,
@@ -27,16 +31,12 @@ app.get('/', (req, res, next) => {
       };
       ghResponse.push(parsedObj);
     })
-    console.log(ghResponse[3]);
+    console.log('API Fulfilled available for pull');
+    res.send( ghResponse);
   })).catch(error => {
     console.log(error);
   })
 });
-
-app.get('/', (req, res, next) => {
-    res.send(ghResponse);
-})
-
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
