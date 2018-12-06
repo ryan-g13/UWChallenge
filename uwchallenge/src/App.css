@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #080808;
 }
 /* 
 .App-logo {
@@ -31,8 +32,30 @@
   }
 } */
 
+.images {
+  /* display: flex;
+  /* flex-direction: row;
+  flex-wrap: wrap;
+  /* align-content: flex-start; */
+  text-align: center;
+  background: #080808;
+}
+
+.imageblock {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  /* align-content: flex-start; */
+  /* text-align: center; */
+  background: #080808;
+}
+
+.App h1 {
+  color: #61dafb;
+}
+
 .App img {
-  width: 20px;
+  width: 40px;
   border: outset 3px gold;
   float: left;
 }

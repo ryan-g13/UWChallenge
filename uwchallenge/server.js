@@ -15,15 +15,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const ghResponse = [];
+let apiStart = 1000;
 
 app.get('/', (req, res, next) => {
   axios.all([
-    axios.get('https://api.github.com/repositories?since=1000'),
-    axios.get('https://api.github.com/repositories?since=1100'),
-    axios.get('https://api.github.com/repositories?since=1200')
-  ]).then(axios.spread((response1, response2, response3) => {
+    axios.get(`https://api.github.com/repositories?since=${apiStart}`),
+    axios.get(`https://api.github.com/repositories?since=${apiStart + 100}`),
+    axios.get(`https://api.github.com/repositories?since=${apiStart + 200}`),
+    axios.get(`https://api.github.com/repositories?since=${apiStart + 300}`)
+  ]).then(axios.spread((response1, response2, response3, response4) => {
     // let preParsedArr = response1.data;
-    let preParsedArr = [response1.data, response2.data, response3.data];
+    let preParsedArr = [response1.data, response2.data, response3.data, response4.data];
 
     preParsedArr.forEach(array => {
       array.forEach(obj => {
