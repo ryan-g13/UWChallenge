@@ -18,7 +18,7 @@ export class GHFetch extends Component {
     if(this.state.fetched === false) {
     fetch('http://localhost:4000/').then(response => {
       if(!response.ok) {
-        throw new Error('Api call failed to fetch');
+        throw new Error('Api call failed to fetch Images');
       }
       console.log(response);
       return response;
@@ -62,8 +62,20 @@ class ImageItem extends React.Component {
   render() {
 
     // Hover functionality 
-    // onMouseEnter() {
+    // onMouseEnter(event) {
       // make a fetch call based on whether the username of the image is an 'A' or 'a'
+      // if(event.target.property.charAt(0).toLowerCase() === 'a') {
+      // fetch(event.target.property).then(response => {
+      //   if(!response.ok) {
+      //     throw new Error('Api call failed to fetch followers');
+      //   }
+      //   console.log(response);
+      //   return response;
+      // }).then(data => data.json())
+      // .then(data => {
+      //  populate modal component with first 5 data points 
+      // }
+      // 
       // display first 5 followers as a modal list
       // disallow other mouse enter events until the close of this modal
     // }

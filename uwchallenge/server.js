@@ -1,3 +1,4 @@
+// Importing with ES5 for express server since es6 not supported. 
 var express = require('express'),
   app = express(),
   port = process.env.port || 4000;
@@ -6,6 +7,7 @@ var axios = require('axios');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
+// Middleware necessary for front end to talk to backend
 app.use(cors({
   credentials: true,
   origin: ['http://localhost:3000'],
@@ -14,6 +16,9 @@ app.use(cors({
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+// Defining Github route for fetch via promises since retrieving multiple api endpoints
+// +++++++++++++++++++++++++++++++++++++++++++++++++
 const ghResponse = [];
 let apiStart = 1000;
 
